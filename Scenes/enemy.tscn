@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_yko8m"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_srp88"]
+[sub_resource type="TorusMesh" id="TorusMesh_6pdd6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pue73"]
 
@@ -16,10 +16,10 @@ points = PackedVector3Array(0, 0, 0, 7.5, 0, -6.2, -7.5, 0, -6.4, 0, 0.546, 0, 7
 [node name="Enemy" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.490347, 0)
 script = ExtResource("1_yko8m")
-way_points = Array[Marker3D]([null, null])
+way_points = [null, null]
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_srp88")
+mesh = SubResource("TorusMesh_6pdd6")
 skeleton = NodePath("../Shape")
 
 [node name="Shape" type="CollisionShape3D" parent="."]
@@ -31,11 +31,10 @@ shape = SubResource("SphereShape3D_pue73")
 one_shot = true
 
 [node name="gun" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.27811, 0, 0, 0, 0.31537, 0, 0, 0, 1.05156, 0.0116106, 0, -0.604748)
+transform = Transform3D(0.27811, 0, 0, 0, 0.31537, 0, 0, 0, 1.05156, 0.0116106, 0, -1.25732)
 mesh = SubResource("SphereMesh_3x7te")
 
 [node name="HearingFar" type="Area3D" parent="."]
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HearingFar"]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
@@ -43,7 +42,6 @@ shape = SubResource("SphereShape3D_wog7a")
 
 [node name="HearingClose" type="Area3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HearingClose"]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
@@ -53,6 +51,9 @@ shape = SubResource("SphereShape3D_wog7a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SlightClose"]
 shape = SubResource("ConvexPolygonShape3D_ca78c")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.239209, 0)
 
 [connection signal="timeout" from="PatrolTimer" to="." method="_on_patrol_timer_timeout"]
 [connection signal="body_entered" from="HearingFar" to="." method="_on_hearing_far_body_entered"]
